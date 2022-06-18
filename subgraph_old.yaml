@@ -1,0 +1,25 @@
+specVersion: 0.0.1
+description: ENS Subdomain Subgraph
+repository: https://github.com/Pryority/subdomain-tree
+schema:
+  file: ./token.graphql
+dataSources:
+  - kind: ethereum/contract
+  name: Subdomains
+  network: mainnet
+  source: 
+    address: "0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72"
+    abi: ENS
+    startBlock: 13812999
+  mapping: 
+    kind: ethereum/events
+    apiVersion: 0.0.4
+    language: wasm/assemblyscript
+    file: ./mapping/subdomain.ts
+    entities:
+      - Domain
+    abis:
+      - name: ENS
+        file: ./abis/ENS.json
+    eventHandlers:
+      - event: Domain()
